@@ -2,13 +2,13 @@
   "name": "hospital",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://github.com/RahulMisal/abccheck#readme",
+  "homepage": "https://github.com/RahulMisal/demoxyz#readme",
   "bugs": {
-    "url": "https://github.com/RahulMisal/abccheck/issues"
+    "url": "https://github.com/RahulMisal/demoxyz/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RahulMisal/abccheck.git"
+    "url": "git+https://github.com/RahulMisal/demoxyz.git"
   },
   "license": "ISC",
   "author": "",
