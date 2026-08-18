@@ -2,6 +2,14 @@
   "name": "hospital",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://github.com/RahulMisal/abccheck#readme",
+  "bugs": {
+    "url": "https://github.com/RahulMisal/abccheck/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RahulMisal/abccheck.git"
+  },
   "license": "ISC",
   "author": "",
   "type": "commonjs",
