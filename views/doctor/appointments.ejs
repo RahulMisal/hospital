@@ -1,0 +1,118 @@
+<%- include('header.ejs'); %>
+      <div class="dashboard-content">
+
+        <div class="page-toolbar">
+          <h2>Manage Appointments</h2>
+          <div class="page-toolbar-actions">
+            <button type="button" class="btn btn-outline btn-sm">
+              <i class="fa-solid fa-download"></i> Export Today
+            </button>
+          </div>
+        </div>
+
+        <div class="dashboard-panel">
+          <div class="dashboard-panel-body">
+            <div data-tabs>
+              <div class="tabs">
+                <button type="button" class="tab-btn active" data-tab="today">Pending <span>3</span></button>
+                <button type="button" class="tab-btn" data-tab="upcoming">Confirm <span>2</span></button>
+                <button type="button" class="tab-btn" data-tab="completed">Completed <span>3</span></button>
+                <button type="button" class="tab-btn" data-tab="cancelled">Cancelled <span>1</span></button>
+              </div>
+
+              <div class="tab-panel active" data-tab-panel="today">
+                <div class="table-wrapper">
+                  <table class="table">
+                    <thead>
+                      <tr><th>Patient</th><th>Time</th><th>Reason</th><th>Status</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+                      <% for(var i=0;i<pending.length;i++){ %>
+                      <tr>
+                        <td><div class="table-user"><div><strong><%=pending[i].p_name%></strong><span><%=pending[i].p_gender%> ·  yrs</span></div></div></td>
+                        <td><%=pending[i].app_date%>, <%=pending[i].app_time%></td>
+                        <td><%=pending[i].app_reason%></td>
+                        <td><span class="badge badge-approved"><%=pending[i].status%></span></td>
+                        <td class="table-actions">
+                          <a href="/doctor/app_confirm/<%=pending[i].app_id%>" class="btn btn-sm btn-outline">Confirm</a>
+                          <a href="/doctor/app_reject/<%=pending[i].app_id%>" class="btn btn-sm btn-outline">Reject</a>
+                        </td>
+                      </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tab-panel" data-tab-panel="upcoming" hidden>
+                <div class="table-wrapper">
+                  <table class="table">
+                    <thead>
+                      <tr><th>Patient</th><th>Time</th><th>Reason</th><th>Status</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+                      <% for(var i=0;i<confirm.length;i++){ %>
+                      <tr>
+                        <td><div class="table-user"><div><strong><%=confirm[i].p_name%></strong><span><%=confirm[i].p_gender%> ·  yrs</span></div></div></td>
+                        <td><%=confirm[i].app_date%>, <%=confirm[i].app_time%></td>
+                        <td><%=confirm[i].app_reason%></td>
+                        <td><span class="badge badge-approved"><%=confirm[i].status%></span></td>
+                        <td class="table-actions">
+                          <a href="/doctor/app_complete/<%=confirm[i].app_id%>" class="btn btn-sm btn-outline">Complete</a>
+                          <a href="/doctor/app_reject/<%=confirm[i].app_id%>" class="btn btn-sm btn-outline">Reject</a>
+                        </td>
+                      </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tab-panel" data-tab-panel="completed" hidden>
+                <div class="table-wrapper">
+                  <table class="table">
+                    <thead>
+                      <tr><th>Patient</th><th>Time</th><th>Reason</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                      <% for(var i=0;i<complete.length;i++){ %>
+                      <tr>
+                        <td><div class="table-user"><div><strong><%=complete[i].p_name%></strong><span><%=complete[i].p_gender%> ·  yrs</span></div></div></td>
+                        <td><%=complete[i].app_date%>, <%=complete[i].app_time%></td>
+                        <td><%=complete[i].app_reason%></td>
+                        <td><span class="badge badge-approved"><%=complete[i].status%></span></td>
+                      </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tab-panel" data-tab-panel="cancelled" hidden>
+                <div class="table-wrapper">
+                  <table class="table">
+                    <thead>
+                      <tr><th>Patient</th><th>Time</th><th>Reason</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                       <% for(var i=0;i<reject.length;i++){ %>
+                      <tr>
+                        <td><div class="table-user"><div><strong><%=reject[i].p_name%></strong><span><%=reject[i].p_gender%> ·  yrs</span></div></div></td>
+                        <td><%=reject[i].app_date%>, <%=reject[i].app_time%></td>
+                        <td><%=reject[i].app_reason%></td>
+                        <td><span class="badge badge-approved"><%=reject[i].status%></span></td>
+                        
+                      </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<%- include('footer.ejs'); %>

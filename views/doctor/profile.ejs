@@ -1,0 +1,167 @@
+<%- include('header.ejs'); %>
+
+
+      <div class="dashboard-content">
+
+        <div class="profile-layout">
+          <!-- Sidebar card -->
+          <div class="profile-sidebar-card">
+            <div class="profile-avatar-wrap">
+              <img src="/images/<%=data.doc_image %>" alt="<%=data.doc_name %>" />
+              <span class="avatar-edit" title="Change photo"><i class="fa-solid fa-camera"></i></span>
+            </div>
+            <h3><%=data.doc_name %></h3>
+            <span class="role-tag"><%=data.doc_departmentid %></span>
+            <div class="profile-stats-mini">
+              <div>
+                <strong><%=data.doc_experience %></strong>
+                <span>Years Experience</span>
+              </div>
+              <div>
+                <strong>312</strong>
+                <span>Patients Treated</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form card -->
+          <div class="profile-form-card">
+            <div class="profile-form-tabs" data-tabs>
+              <button type="button" class="active" data-tab="personal">Personal Info</button>
+              <button type="button" data-tab="security">Change Password</button>
+            </div>
+
+            <div class="profile-form-body">
+              <!-- Personal info -->
+              <div class="tab-panel active" data-tab-panel="personal">
+                <h4 class="form-section-title">Personal &amp; Professional Details</h4>
+                <form action="/doctor/profile_save" method="post" enctype="multipart/form-data">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">New Profile Photo</label>
+                      <input type="file" name="doc_image_new" class="form-control" />
+                      <input type="hidden" name="doc_image_old" value="<%=data.doc_image %>" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Full Name <span class="required">*</span></label>
+                      <input type="text" name="doc_name" class="form-control" value="<%=data.doc_name %>" required />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Email Address</label>
+                      <input type="email" name="doc_email" class="form-control" value="<%=data.doc_email %>" disabled />
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Phone Number</label>
+                      <input type="tel" name="doc_phone" class="form-control" value="<%=data.doc_phone %>" placeholder="+1 555-0000" />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Specialty</label>
+                      <input type="text" name="doc_specialty" class="form-control" value="<%=data.doc_specialty %>" />
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Department</label>
+                      <select name="doc_departmentid" class="form-control">
+                        <option >Choose</option>
+                        <% for(var i=0;i<department.length;i++){ %>
+                        <option value="<%=department[i].did %>" <%= (data.doc_departmentid ==department[i].did)? "selected" : null %>><%=department[i].name%></option>
+                        <% } %>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Gender</label>
+                      <select name="doc_gender" class="form-control">
+                        <option value="">Select</option>
+                        <option value="male" <% if(data.doc_gender == "male"){ %> selected <% } %>>Male</option>
+                        <option value="female" <%= (data.doc_gender == "female")? "selected" : null %>>Female</option>
+                      </select>
+                    </div>
+                  </div>
+                  <% if(moredetails[0]){ %>
+                  <div class="form-group">
+                    <label class="form-label">Doctor Address</label>
+                    <input type="text" name="doc_address" class="form-control" value="<%=moredetails[0].doc_address%>" />
+                  </div>
+                   <div class="form-group">
+                    <label class="form-label">Doctor Description</label>
+                    <input type="text" name="doc_desc" class="form-control" value="<%=moredetails[0].doc_desc%>" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Doctor Language</label>
+                    <input type="text" name="doc_language" class="form-control" value="<%=moredetails[0].doc_language%>" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Doctor Timetable Day</label>
+                    <input type="text" name="doc_timetableday" class="form-control" value="<%=moredetails[0].doc_timetableday%>" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Doctor Timetable Time</label>
+                    <input type="text" name="doc_timetabletime" class="form-control" value="<%=moredetails[0].doc_timetabletime%>" />
+                  </div>
+                  <% }else { %>
+                      <div class="form-group">
+                    <label class="form-label">Doctor Address</label>
+                    <input type="text" name="doc_address" class="form-control"  />
+                  </div>
+                   <div class="form-group">
+                    <label class="form-label">Doctor Description</label>
+                    <input type="text" name="doc_desc" class="form-control"  />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Doctor Language</label>
+                    <input type="text" name="doc_language" class="form-control"  />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Doctor Timetable Day</label>
+                    <input type="text" name="doc_timetableday" class="form-control"  />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Doctor Timetable Time</label>
+                    <input type="text" name="doc_timetabletime" class="form-control"  />
+                  </div>
+                  <% } %>
+                  <div class="form-actions">
+                    <button type="reset" class="btn btn-outline">Reset</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Save Changes</button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Password -->
+              <div class="tab-panel" data-tab-panel="security" hidden>
+                <h4 class="form-section-title">Change Password</h4>
+                <form action="#" method="post">
+                  <div class="form-group">
+                    <label class="form-label">Current Password <span class="required">*</span></label>
+                    <input type="password" name="currentPassword" class="form-control" required />
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">New Password <span class="required">*</span></label>
+                      <input type="password" name="newPassword" class="form-control" minlength="6" required />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Confirm New Password <span class="required">*</span></label>
+                      <input type="password" name="confirmPassword" class="form-control" minlength="6" required />
+                    </div>
+                  </div>
+                  <p class="form-hint"><i class="fa-solid fa-circle-info"></i> Password must be at least 6 characters long.</p>
+                  <div class="form-actions">
+                    <button type="reset" class="btn btn-outline">Reset</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-lock"></i> Update Password</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+<%- include('footer.ejs'); %>
