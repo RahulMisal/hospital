@@ -2,11 +2,10 @@ var mysql=require('mysql2');
 var util=require('util');
 
 var conn=mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'root',
-    database:'hospital_web',
-    port:3307
+    host:'brtrgihkpflcpdlmwxtj-mysql.services.clever-cloud.com',
+    user:'uh1jhckgfyweaqit',
+    password:'QAvKSrKX83YEG6wExWzQ',
+    database:'brtrgihkpflcpdlmwxtj'
 });
 
 var exe=util.promisify(conn.query).bind(conn);
